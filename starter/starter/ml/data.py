@@ -2,6 +2,22 @@ import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
 
+def clean_data(df)
+  #Step 1: Clean Column Names - Trim spaces from column names
+  df.columns = df.columns.str.strip()
+
+  #Step 2: Check and remove duplicates if any
+  duplicates_count = df.duplicated().sum()
+  df = df.drop_duplicates()
+
+  #Step 3: Standardize Categorical Columns - Trim spaces and standardize case
+  categorical_cols = df.select_dtypes(include='object').columns
+  df[categorical_cols] = df[categorical_cols].apply(lambda x: x.str.strip().str.lower())
+
+  #Display the cleaned data summary and duplicates count
+  print(f"Number of duplicates removed: {duplicates_count}")
+  return df
+
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
 ):
