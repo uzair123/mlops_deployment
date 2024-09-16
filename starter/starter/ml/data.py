@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
 
-def clean_data(df)
+def clean_data(df):
   #Step 1: Clean Column Names - Trim spaces from column names
   df.columns = df.columns.str.strip()
 

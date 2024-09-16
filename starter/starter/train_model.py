@@ -1,19 +1,18 @@
 # Script to train machine learning model.
-
-from sklearn.model_selection import train_test_split
-
 # Add the necessary imports for the starter code.
 import pandas as pd
-import data
-import train_model
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import joblib
+from ml.model import train_model, model_performance_on_slices,compute_model_metrics,inference
+from ml.data import process_data
+from ml.data import clean_data
+
+import logging
 
 
 # Add code to load in the data.
-df = pd.read_csv('data/census.csv') 
+df = pd.read_csv('../data/census.csv')
 data = clean_data(df)
 
 
@@ -35,15 +34,34 @@ X_train, y_train, encoder, lb = process_data(
 )
 
 # Proces the test data with the process_data function.
-X_test, y_test, encoder, lb = process_data(
-    test, categorical_features=cat_features, label="salary", training=False
+X_test, y_test, _, _ = process_data(
+    test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
 )
 # Train and save a model.
 model = train_model(X_train, y_train)
-model_filename = 'random_forest_model.pkl'
+model_filename = 'model.pkl'
 joblib.dump(model, model_filename)
 print(f"Model saved to {model_filename}")
 
+pred = inference(model, X_test)
+precision, recall, fbeta = compute_model_metrics(y_test,pred)
+print("precision, recall, fbeta",precision, recall, fbeta)
+
+
+
+
+# Identify categorical columns (with dtype 'object' for strings or 'category')
+categorical_columns = df.select_dtypes(include=['object']).columns
+
+# Get indices of the categorical columns in the DataFrame
+categorical_indices = [df.columns.get_loc(col) for col in categorical_columns]
+
+# Print the categorical columns and their corresponding indices
+print("Categorical Columns:", categorical_columns)
+print("Categorical Indices:", categorical_indices)
+
+print("model_performance_on_slices")
+model_performance_on_slices(model, X_test,y_test,categorical_indices)
 
 
      #  Evaluate the model
