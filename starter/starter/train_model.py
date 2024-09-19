@@ -7,7 +7,7 @@ import joblib
 from ml.model import train_model, model_performance_on_slices,compute_model_metrics,inference
 from ml.data import process_data
 from ml.data import clean_data
-
+import pickle
 import logging
 
 
@@ -40,8 +40,26 @@ X_test, y_test, _, _ = process_data(
 # Train and save a model.
 model = train_model(X_train, y_train)
 model_filename = 'model.pkl'
-joblib.dump(model, model_filename)
+#joblib.dump(model, model_filename)
 print(f"Model saved to {model_filename}")
+
+
+
+# Save the model
+with open('model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+print(f"Model saved to {model_filename}")
+
+# Save the trained OneHotEncoder
+with open('encoder.pkl', 'wb') as f:
+    pickle.dump(encoder, f)
+
+print("Enocder saved!")
+
+
+with open('lb.pkl', 'wb') as f:
+    pickle.dump(lb, f)
 
 pred = inference(model, X_test)
 precision, recall, fbeta = compute_model_metrics(y_test,pred)

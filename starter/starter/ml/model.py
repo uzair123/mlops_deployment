@@ -91,8 +91,11 @@ def model_performance_on_slices(model, X, y, categorical_feature_indices):
     -------
     None, but prints performance metrics for each slice.
     """
-    # Run predictions on the entire dataset
+    # Print the metrics for this slice
+
+    #Run predictions on the entire dataset
     preds = model.predict(X)
+
 
     for feature_idx in categorical_feature_indices:
         print(f"Performance metrics for slices of feature at column index: {feature_idx}")
@@ -111,11 +114,11 @@ def model_performance_on_slices(model, X, y, categorical_feature_indices):
             recall = recall_score(y_slice, preds_slice, zero_division=1)
             fbeta = fbeta_score(y_slice, preds_slice, beta=1, zero_division=1)
 
-            # Print the metrics for this slice
-            print(f"  Category: {value}")
-            print(f"    Precision: {precision:.4f}")
-            print(f"    Recall: {recall:.4f}")
-            print(f"    F1 Score: {fbeta:.4f}")
-            print("\n")
+            with open('slice.txt', 'a') as f:
+             f.write(f"  Category: {value:4f}\n")
+             f.write(f"    Precision: {precision:.4f}\n")
+             f.write(f"    Recall: {recall:.4f}\n")
+             f.write(f"    F1 Score: {fbeta:.4f}\n")
+             f.write("\n")
 
 
