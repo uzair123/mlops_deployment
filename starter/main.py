@@ -4,18 +4,26 @@ from typing import List, Optional
 import joblib
 import numpy as np
 import pandas as pd
+import os
 from starter.ml.data import process_data
 # Initialize the FastAPI app
 app = FastAPI()
 
 import pickle
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Build the full path to model.pkl
+model_path = os.path.join(current_dir, 'starter/model.pkl')
 
 # Load the model
-with open('./starter/model.pkl', 'rb') as f:
+with open(model_path, 'rb') as f:
+#with open('./starter/model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # Load the enoder
-with open('./starter/encoder.pkl', 'rb') as f:
+model_path = os.path.join(current_dir, 'starter/encoder.pkl')
+with open(model_path, 'rb') as f:
+#with open('./starter/encoder.pkl', 'rb') as f:
     encoder = pickle.load(f)
 
 
