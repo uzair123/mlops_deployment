@@ -2,8 +2,7 @@ import unittest
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_score, recall_score, fbeta_score
-from starter.model import train_model, compute_model_metrics, inference
-
+from starter.ml.model import train_model, compute_model_metrics, inference
 
 class TestMLModel(unittest.TestCase):
 
