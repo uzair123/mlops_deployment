@@ -25,24 +25,6 @@ def train_model(X_train, y_train):
     model.fit(X_train, y_train)
     return model
 
-     
-def save_model(model, model_name):
-    """
-
-    Parameters
-    ----------
-    model
-    model_name
-
-    Returns
-    -------
-
-    """
-    # Save the model
-    with open('model.pkl', 'wb') as f:
-        pickle.dump(model, f)
-
-    print(f"Model saved to {model_filename}")
 
 
 def compute_model_metrics(y, preds):
