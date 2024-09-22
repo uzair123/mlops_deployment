@@ -8,24 +8,17 @@ Intended Use
 This model is intended for use in applications that predict whether an individual's salary exceeds $50,000 based on various demographic and employment-related features. It can be used in tools for career advice, salary estimation, or demographic analysis.
 Training Data
 
-    Source: [Insert source, e.g., UCI Adult Income Dataset]
     Features: The model was trained on features such as age, workclass, education, marital status, occupation, relationship, race, sex, capital gain, capital loss, hours per week, and native country.
-    Sample Size: [Insert number of training samples]
     Data Preprocessing: The data was preprocessed to handle missing values, encode categorical features, and standardize numerical values.
 
 Evaluation Data
 
-    Source: [Insert source if different from training data, otherwise indicate "same as training data"]
-    Sample Size: [Insert number of evaluation samples]
+    Source: test data which was not used for training
     Data Splitting: The dataset was split into training and evaluation sets, with [insert percentage or method used, e.g., 80/20 split].
 
 Metrics
 
-    Accuracy: [Insert accuracy percentage]
-    Precision: [Insert precision score]
-    Recall: [Insert recall score]
-    F1 Score: [Insert F1 score]
-    AUC-ROC: [Insert AUC-ROC score if applicable]
+Precision: 0.7250187828700225, Recall: 0.619781631342325, Fbeta: 0.6682825484764543
 
 Ethical Considerations
 
